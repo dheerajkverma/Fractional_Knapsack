@@ -1,0 +1,43 @@
+
+#include <iostream>
+#include <bits/stdc++.h> 
+
+using namespace std;
+
+bool mysort(pair <int,int> a, pair <int,int> b){
+    double r1=a.first/a.second;
+    double r2=b.first/b.second;
+    return (a.first<b.first);
+}
+
+int fsack(pair <int,int> a[], int n ,int cap){
+    int temp=cap;
+    int res=0;
+    sort(a,a+n,mysort);
+    for (int curr = 0; curr <  n; curr++){
+        if(a[curr].first<=cap){
+            res+=a[curr].second;
+            cap-=a[curr].first;
+        }
+        else{
+            float c=cap;
+            res=res+(c/(a[curr].first))*a[curr].second;
+            break;
+        }
+        
+    }
+    return res;
+}
+
+int main() {
+	// your code goes here
+	pair <int, int> arr[] = {make_pair(10, 200), make_pair(5, 50), make_pair(20, 100)};
+
+	int n = 3, cap=15;
+
+	cout<<fsack(arr, n,cap); 
+
+	return 0;
+
+}
+
